@@ -50,3 +50,21 @@ get_mean_sd <- function(data, label_prefix) {
 # start building the master data set by adding and labeling the Subject.IDs
 data <- combine_test_training("subject")
 names(data)[1] <- "Subject.ID"
+
+
+## Activity.Names - create and merge in column of Activity Names
+# create a map of activity codes to labels
+Activity_Labels <- read.table("./data/activity_labels.txt",
+                              col.names=c("Activity.ID", "Activity.Name"),
+                              stringsAsFactors=FALSE)
+
+# read/combine and label the Activity Data
+ActivityData <- combine_test_training("y")
+names(ActivityData)[1] <- "Activity.ID"
+
+# join the labels and the data to name all the data
+ActivityData <- join(ActivityData, Activity_Labels)
+
+# add a column for the Activity.Name
+data <- cbind(data, ActivityData[,2], stringsAsFactors=FALSE)
+names(data)[2] <- "Activity.Name"
