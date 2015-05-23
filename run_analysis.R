@@ -17,13 +17,19 @@ if(!file.exists(localDataFile)) {
 # measurement type and returns a data table containing the mean and standard deviation
 # of each measurement
 get_mean_sd <- function(m_type) {
+  # read the test and training data into data frames and bind into one data frame
   test_data <- read.delim(paste0("./data/", m_type, "_test.txt"),
                           header=FALSE, sep="")
   train_data <- read.delim(paste0("./data/", m_type, "_train.txt"),
                            header=FALSE, sep="")
   all_data <- rbind(test_data, train_data)
+
+  # calculate the mean and standard deviation of each row/measurement
   all_mean <- as.numeric(apply(all_data, c(1), mean))
   all_sd <- as.numeric(apply(all_data, c(1), sd))
+
+  # combine the mean and sd vectors into a data frame; provide meaningful names
+  # for the columns, and return to the caller
   all_mean_sd <- data.frame(cbind(all_mean, all_sd))
   names(all_mean_sd)[1] <- paste0(m_type, ".Mean")
   names(all_mean_sd)[2] <- paste0(m_type, ".SD")
