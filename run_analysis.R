@@ -13,25 +13,33 @@ if(!file.exists(localDataFile)) {
   unzip(localDataFile, overwrite=FALSE, junkpaths=TRUE, exdir="./data")
 }
 
-# get_mean_sd: a function that combines test and training data from the specified
-# measurement type and returns a data table containing the mean and standard deviation
-# of each measurement
-get_mean_sd <- function(m_type) {
-  # read the test and training data into data frames and bind into one data frame
+## Define functions for reading and combining data files and reporting means
+
+# combine_test_training - takes a file name part (the name excluding _test or
+# _training) of a target data type; reads the data from the test and training
+# files; combines then, and returns a data.frame with the combined data.
+combine_test_training <- function(m_type) {
+  # read the test and training data into data.frames and bind into one data frame
   test_data <- read.delim(paste0("./data/", m_type, "_test.txt"),
                           header=FALSE, sep="")
   train_data <- read.delim(paste0("./data/", m_type, "_train.txt"),
                            header=FALSE, sep="")
-  all_data <- rbind(test_data, train_data)
+  rbind(test_data, train_data)
+}
 
+# get_mean_sd: takes a data.frame with raw data and a label prefix and returns a
+# data.frame containing the mean and standard deviation for each row of
+# measurements; provides descriptive names for the columns based on the label
+# prefix passed
+get_mean_sd <- function(data, label_prefix) {
   # calculate the mean and standard deviation of each row/measurement
-  all_mean <- as.numeric(apply(all_data, c(1), mean))
-  all_sd <- as.numeric(apply(all_data, c(1), sd))
+  Means <- as.numeric(apply(data, c(1), mean))
+  SDs <- as.numeric(apply(data, c(1), sd))
 
   # combine the mean and sd vectors into a data frame; provide meaningful names
   # for the columns, and return to the caller
-  all_mean_sd <- data.frame(cbind(all_mean, all_sd))
-  names(all_mean_sd)[1] <- paste0(m_type, ".Mean")
-  names(all_mean_sd)[2] <- paste0(m_type, ".SD")
-  return(all_mean_sd)
+  means_sds <- data.frame(cbind(Means, SDs))
+  names(means_sds)[1] <- paste0(label_prefix, ".Mean")
+  names(means_sds)[2] <- paste0(label_prefix, ".SD")
+  return(means_sds)
 }
