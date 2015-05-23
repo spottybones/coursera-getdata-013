@@ -12,3 +12,13 @@ if(!file.exists(localDataFile)) {
   download.file(dataURL, destfile=localDataFile, method="curl")
   unzip(localDataFile, overwrite=FALSE, junkpaths=TRUE, exdir="./data")
 }
+
+# combine_data: a function that combines test and training data from the specified
+# measurement type and returns it as a data table
+combine_data <- function(m_type) {
+  test_data <- read.delim(paste0("./data/", m_type, "_test.txt"),
+                          header=FALSE, sep="")
+  train_data <- read.delim(paste0("./data/", m_type, "_train.txt"),
+                           header=FALSE, sep="")
+  all_data <- rbind(test_data, train_data)
+}
