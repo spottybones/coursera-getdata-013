@@ -43,3 +43,6 @@ get_mean_sd <- function(data, label_prefix) {
   names(means_sds)[2] <- paste0(label_prefix, ".SD")
   return(means_sds)
 }
+
+# start building the master data set
+data <- data.frame()
