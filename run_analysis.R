@@ -68,3 +68,17 @@ ActivityData <- join(ActivityData, Activity_Labels)
 # add a column for the Activity.Name
 data <- cbind(data, ActivityData[,2], stringsAsFactors=FALSE)
 names(data)[2] <- "Activity.Name"
+
+
+## Features - clean up and merge in mean and standard deviation feature measurements
+Features <- read.table("./data/features.txt",
+                       col.names=c("Feature.ID", "Feature.Name"),
+                       stringsAsFactors=FALSE)
+
+# read feature measurements into a data table and label the columns
+FeatureMeasurements <- combine_test_training("X")
+names(FeatureMeasurements) <- Features$Feature.Name
+
+# bind the measurements on the mean and standard deviation to the master data table - we
+# pull the desired columns by grepping for "mean" or "std" in their names
+data <- cbind(data, FeatureMeasurements[,grep("-(mean|std)\\(\\)", Features$Feature.Name)])
