@@ -44,6 +44,9 @@ get_mean_sd <- function(data, label_prefix) {
   return(means_sds)
 }
 
+## Generate the tidy data set
+
+## Subject.IDs
 # start building the master data set by adding and labeling the Subject.IDs
 data <- combine_test_training("subject")
 names(data)[1] <- "Subject.ID"
