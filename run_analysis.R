@@ -21,11 +21,11 @@ if(!file.exists(localDataFile)) {
 # combine_test_training - takes a file name part (the name excluding _test or
 # _training) of a target data type; reads the data from the test and training
 # files; combines then, and returns a data.frame with the combined data.
-combine_test_training <- function(m_type) {
+combine_test_training <- function(filename_part) {
   # read the test and training data into data.frames and bind into one data frame
-  test_data <- read.delim(paste0("./data/", m_type, "_test.txt"),
+  test_data <- read.delim(paste0("./data/", filename_part, "_test.txt"),
                           header=FALSE, sep="")
-  train_data <- read.delim(paste0("./data/", m_type, "_train.txt"),
+  train_data <- read.delim(paste0("./data/", filename_part, "_train.txt"),
                            header=FALSE, sep="")
   rbind(test_data, train_data)
 }
