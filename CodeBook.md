@@ -1,6 +1,6 @@
 ## Code Book
 
-The input data provided by the **XXX** project, distributed as a ZIP file, is split into a large number of plain text files with columns delimited by white-space. In addition, many of the observations are split into two sets: test and train, and must be combined to produce a single tidy data set. The ZIP file contains two files: `README.txt` and `features_info.txt` that document the input data set.
+The input data provided by the **[Human Activity Recognition Using Smartphones Data Set](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)** project, distributed as a ZIP file, is split into a large number of plain text files with columns delimited by white-space. In addition, many of the observations are split into two sets: test and train, and must be combined to produce a single tidy data set. The ZIP file contains two files: `README.txt` and `features_info.txt` that document the input data set.
 
 The `run_analysis.R` script performs the following steps to transform the data:
 
