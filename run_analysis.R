@@ -1,3 +1,6 @@
+# load required libraries
+library(plyr)
+
 # Set constants
 dataURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 localDataFile <- "./data/HAR Dataset.zip"
