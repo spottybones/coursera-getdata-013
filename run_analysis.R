@@ -88,3 +88,8 @@ data <- cbind(data, FeatureMeasurements[,grep("-(mean|std)\\(\\)", Features$Feat
 names(data) <- gsub("-", ".", names(data))
 names(data) <- gsub(".mean\\(\\)", ".Mean", names(data))
 names(data) <- gsub(".std\\(\\)", ".SD", names(data))
+
+## Generate a second tidy data set that contains the average measurement of each
+## variable grouped by Subject and Activity
+sumdata <- ddply(data, c("Subject.ID", "Activity.Name"),
+                 function(x) { colMeans(x[grep("^(t|f)", names(data))]) })
