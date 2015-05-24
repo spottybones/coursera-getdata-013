@@ -14,5 +14,6 @@ vignettes/*.html
 vignettes/*.pdf
 .Rproj.user
 
-# local copies of data
+# local copies of input and output data
 data/
+output/
