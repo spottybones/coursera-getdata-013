@@ -93,3 +93,10 @@ names(data) <- gsub(".std\\(\\)", ".SD", names(data))
 ## variable grouped by Subject and Activity
 sumdata <- ddply(data, c("Subject.ID", "Activity.Name"),
                  function(x) { colMeans(x[grep("^(t|f)", names(data))]) })
+
+
+## export both tidy data sets as text files delimited by whitespace
+write.table(data, "./output/tidy-smartphone-data.txt",
+            row.names=FALSE, quote=FALSE)
+write.table(sumdata, "./output/tidy-smartphone-sumdata.txt",
+            row.names=FALSE, quote=FALSE)
