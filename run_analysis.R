@@ -82,3 +82,9 @@ names(FeatureMeasurements) <- Features$Feature.Name
 # bind the measurements on the mean and standard deviation to the master data table - we
 # pull the desired columns by grepping for "mean" or "std" in their names
 data <- cbind(data, FeatureMeasurements[,grep("-(mean|std)\\(\\)", Features$Feature.Name)])
+
+# clean up the column names to make them easier to parse: 1) convert all hyphens
+# to periods, 2) remove parenthesis, 3) capitalize the mean/SD piece
+names(data) <- gsub("-", ".", names(data))
+names(data) <- gsub(".mean\\(\\)", ".Mean", names(data))
+names(data) <- gsub(".std\\(\\)", ".SD", names(data))
