@@ -4,4 +4,4 @@ The script `run_analysis.R` contained in this repository will read raw data prov
 
 ## Instruction List / Script
 
-The `run_analysis.R` script will perform all steps needed to download and transform the raw data into a tidy data set.
+The `run_analysis.R` script will perform all steps needed to download and transform the raw data into a tidy data set. The tidy data will be exported to a newly created subdirectory named "output".
